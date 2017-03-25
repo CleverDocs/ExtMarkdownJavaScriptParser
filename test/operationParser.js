@@ -1,44 +1,31 @@
 var OperationParser = require('../lib/rules/operation/operationParser');
-var assert = require('assert');
+//var EMdException = require('../lib/eMdException');
+var SyntaxErrorEMdException = require('../lib/rules/operation/exception/SyntaxErrorEMdException');
+var Chai = require('chai');
+var expect = Chai.expect;
 
-describe('OperationParser.get()', function() {
+console.log( new OperationParser( "Lorem {{ Test + 3 = Test }}Ipsum" ).getEMdExceptions() );
 
-  describe("Case Empty Operation", function() {
-    it("should return empty string", function() {
-      assert.equal( "", new OperationParser( "{{}}" ).get() );
-      assert.equal( "", new OperationParser( `{{
-
-}}` ).get() );
+describe('OperationParser.syntaxCheck()', function() {
+  describe("Case Inversed Assign (Test + 3 = Test) ", function() {
+    
+    it("should return an array with 1 index and eMdException inside", function() {
+      
+      md = "Lorem {{ Test + 3 = Test }}Ipsum";
+      expect( new OperationParser( md ).getEMdExceptions() )
+        .to.have.lengthOf(1);
+      expect( new OperationParser( md ).getEMdExceptions()[0] )
+        .to.be.an.instanceof(SyntaxErrorEMdException);
+      
     });
+    
+    it("should return no EMdException", function() {
+      
+      md = "Lorem {{ Test = Test + 3 }}Ipsum";
+      expect( new OperationParser( md ).getEMdExceptions() )
+        .to.have.lengthOf(0);
+      
+    });
+    
   });
-  
-  describe("Case One Variable Operation", function() {
-    it("should return \"R\"", function() {
-      assert.equal( "R", new OperationParser( "{{R}}" ).get() );
-      assert.equal( "R", new OperationParser( `{{
-R
-}}` ).get() );
-      });
-    });
-  
-  describe("Case Simple Operation", function() {
-    it("should return \"R+5=4\"", function() {
-      assert.equal( "R=4+5", new OperationParser( "{{ R = 4 + 5 }}" ).get() );
-      assert.equal( "R=4+5", new OperationParser( `{{
-  R=4+5
-  }}` ).get() );
-    });
-  });
-  
-  describe("Case Complex Operation", function() {
-    it("should return \"R+5=4\"", function() {
-      assert.deepEqual( [ 'R=4+5', 'IF(R<10){', 'G=1', '}' ], new OperationParser( `{{
-  R = 4 + 5
-  IF( R < 10 ){
-    G=1
-  }
-}}` ).get() );
-    });
-  });
-  
 });
