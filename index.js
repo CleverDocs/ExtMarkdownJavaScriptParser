@@ -1,4 +1,4 @@
-var ExtMarkdown = require('./lib/index');
+var ExtMarkdown = require('./lib/eMd');
 var Remarkable = require('remarkable');
 var Fs = require('fs');
 
