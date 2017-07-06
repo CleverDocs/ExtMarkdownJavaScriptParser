@@ -22,7 +22,18 @@ describe('Operation', function() {
     it("should return 'Lorem Ipsum Dolor'", function() {
 
       md = `Lorem Ipsum {{}} Dolor`;
-      expect( eMd.render( md ) ).to.equal( `Lorem Ipsum  Dolor` );
+      expect( eMd.render( md ) ).to.equal( `Lorem Ipsum Dolor` );
+
+    });
+
+  });
+
+  describe("Example of a simple operation", function() {
+
+    it("should return 'Lorem Ipsum Dolor 2'", function() {
+
+      md = `Lorem Ipsum Dolor {{1+1}}`;
+      expect( eMd.render( md ) ).to.equal( `Lorem Ipsum Dolor 2` );
 
     });
 
