@@ -49,4 +49,26 @@ describe('Operation', function() {
     });
 
   });
+
+  describe("Example of empty inline operation at a both side of a string", function() {
+
+    it("should return 'Lorem Ipsum Dolor'", function() {
+
+      md = `{{TEST=56+6}} Lorem Ipsum Dolor {{TEST=56+6}}`;
+      expect( eMd.render( md ) ).to.equal( `Lorem Ipsum Dolor` );
+
+    });
+
+  });
+
+  describe("Example of empty inline operation wraped by styles at a both side of a string", function() {
+
+    it("should return 'Lorem Ipsum Dolor'", function() {
+
+      md = `**{{TEST=56+6}}** Lorem Ipsum Dolor **{{TEST=56+6}}**`;
+      expect( eMd.render( md ) ).to.equal( `Lorem Ipsum Dolor` );
+
+    });
+
+  });
 });
