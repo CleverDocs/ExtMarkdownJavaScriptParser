@@ -68,12 +68,6 @@ describe('Operation', function() {
 
   describe("Example of a undefined variable", function() {
 
-    it("should return 'Lorem Ipsum Dolor 62'", function() {
-
-
-
-    });
-
     it("should return 'Lorem Ipsum Dolor ??' and not 'Lorem Ipsum Dolor 2' and not because scope unique by render", function() {
       var md1 = `Lorem Ipsum Dolor {{TEST=1+1}}`;
       var foo = eMd.render(md1);
