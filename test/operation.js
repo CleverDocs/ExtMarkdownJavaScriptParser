@@ -22,7 +22,6 @@ describe('Operation', function() {
 
       var md = `Lorem Ipsum Dolor {{1+1}}`;
       expect(eMd.render(md)).to.equal(`Lorem Ipsum Dolor 2`);
-
     });
   });
 
