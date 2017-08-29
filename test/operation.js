@@ -76,4 +76,14 @@ describe('Operation', function() {
 
     });
   });
+
+  describe("Example of a tagged render", function() {
+
+    it("should return 'Lorem Ipsum Dolor <span class=\"emd\" emd-id=\"1\" emd-type=\"operation\">2</span>'", function() {
+      var eMdTags = new ExtMarkdown({tags: true});
+      var md = `Lorem Ipsum Dolor {{1+1}}`;
+      expect(eMdTags.render(md)).to.equal(`Lorem Ipsum Dolor <span class="emd" emd-id="1" emd-type="operation">2</span>`);
+
+    });
+  });
 });
