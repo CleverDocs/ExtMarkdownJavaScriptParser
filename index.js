@@ -2,8 +2,8 @@ var ExtMarkdown = require('./lib/eMd');
 var Remarkable = require('remarkable');
 var Fs = require('fs');
 
-var md = new Remarkable();
-var eMd = new ExtMarkdown();
+var md = new Remarkable({html: true});
+var eMd = new ExtMarkdown({tagsEnabled: true});
 var fileWrite = "./index.html";
 
 Fs.readFile( "./index.md", "utf-8", function( err, fileContent ){
