@@ -5,7 +5,7 @@ var Chai = require('chai');
 var expect = Chai.expect;
 var Cheerio = require("cheerio");
 
-describe('Operation', function() {
+describe('Operation Rendered', function() {
 
   describe("Example of markdown without operation", function() {
 
@@ -89,6 +89,46 @@ describe('Operation', function() {
       expect($('.emd').hasClass('emd')).to.equal(true);
       expect($('.emd').attr('emd-id')).to.equal("1");
       expect($('.emd').attr('emd-type')).to.equal("operation");
+
+    });
+  });
+});
+
+describe('Operation By Object Map', function() {
+
+  describe("Example of markdown without operation", function() {
+
+    it("should return the right object map", function() {
+
+      var md = `Lorem Ipsum Dolor`;
+      expect(eMd.getObjectMap(md)).to.deep.equal({
+        objects: [{
+          type: 'string',
+          content: 'Lorem Ipsum Dolor'
+        }]
+      });
+
+    });
+  });
+});
+
+describe('Operation And Exceptions', function() {
+
+  describe("Example of a simple exception", function() {
+
+    it("should return a @TODO", function() {
+
+      var md = `Lorem Ipsum {{P}} Dolor`;
+      expect(eMd.getObjectMap(md)).to.equal({
+        objects: [{
+          type: 'string',
+          content: 'Lorem Ipsum '
+        }, {
+          type: 'operation',
+          original: 'P'
+          content: '??'
+        }]
+      });
 
     });
   });
