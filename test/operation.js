@@ -116,9 +116,34 @@ describe('Operation And Exceptions', function() {
 
   describe("Example of a simple exception", function() {
 
-    it("should return a @TODO", function() {
+    it("should return the right object map with exception 1", function() {
 
       var md = `Lorem Ipsum {{P}} Dolor`;
+      console.log(eMd.getObjectMap(md));
+      expect(eMd.getObjectMap(md)).to.deep.equal({
+        objects: [{
+          type: 'string',
+          content: 'Lorem Ipsum '
+        }, {
+          type: 'operation',
+          original: 'P',
+          content: '??',
+          isInline: true,
+          exceptions: []
+        }, {
+          type: 'string',
+          content: ' Dolor'
+        }]
+      });
+
+    });
+
+    //@CONTINUE Should pass this test ...
+    //Undefined variable P€ is not detected .
+    it("should return the right object map with exception 2", function() {
+
+      var md = `Lorem {{P=2}} Ipsum {{P€}} Dolor`;
+      console.log(eMd.getObjectMap(md));
       expect(eMd.getObjectMap(md)).to.deep.equal({
         objects: [{
           type: 'string',
