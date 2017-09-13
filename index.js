@@ -10,7 +10,7 @@ Fs.readFile( "./index.md", "utf-8", function( err, fileContent ){
   if(err){
     console.log(err);
   }
-  console.log( eMd.getObjectMap( fileContent ) );
+  console.log( JSON.stringify( eMd.getObjectMap( fileContent ), null, 1 ) );
 
   /*var html = md.render( eMd.getObjectMap( fileContent ) );
   /*if( typeof fileWrite !== 'undefined' && fileWrite ){
