@@ -1,6 +1,7 @@
 var ExtMarkdown = require('../lib/eMd');
 
 var eMd = new ExtMarkdown();
+var eMdTags = new ExtMarkdown({tagsEnabled: true});
 var Chai = require('chai');
 var expect = Chai.expect;
 var Cheerio = require("cheerio");
@@ -81,7 +82,6 @@ describe('Operation Rendered', function() {
   describe("Example of a tagged render", function() {
 
     it("should return 'Lorem Ipsum Dolor <span class=\"emd\" emd-id=\"1\" emd-type=\"operation\">2</span>'", function() {
-      var eMdTags = new ExtMarkdown({tagsEnabled: true});
       var md = `Lorem Ipsum Dolor {{1+1}}`;
       var $ = Cheerio.load(eMdTags.render(md));
 
@@ -119,14 +119,19 @@ describe('Operation And Exceptions', function() {
     it("should return a @TODO", function() {
 
       var md = `Lorem Ipsum {{P}} Dolor`;
-      expect(eMd.getObjectMap(md)).to.equal({
+      expect(eMd.getObjectMap(md)).to.deep.equal({
         objects: [{
           type: 'string',
           content: 'Lorem Ipsum '
         }, {
           type: 'operation',
-          original: 'P'
-          content: '??'
+          original: 'P',
+          content: '??',
+          isInline: true,
+          exceptions: []
+        }, {
+          type: 'string',
+          content: ' Dolor'
         }]
       });
 
