@@ -1,11 +1,12 @@
 var ExtMarkdown = require('../lib/eMd');
 
 var eMd = new ExtMarkdown();
+var eMdTags = new ExtMarkdown({tagsEnabled: true});
 var Chai = require('chai');
 var expect = Chai.expect;
 var Cheerio = require("cheerio");
 
-describe('Operation', function() {
+describe('Operation Rendered', function() {
 
   describe("Example of markdown without operation", function() {
 
@@ -81,7 +82,6 @@ describe('Operation', function() {
   describe("Example of a tagged render", function() {
 
     it("should return 'Lorem Ipsum Dolor <span class=\"emd\" emd-id=\"1\" emd-type=\"operation\">2</span>'", function() {
-      var eMdTags = new ExtMarkdown({tagsEnabled: true});
       var md = `Lorem Ipsum Dolor {{1+1}}`;
       var $ = Cheerio.load(eMdTags.render(md));
 
@@ -89,6 +89,51 @@ describe('Operation', function() {
       expect($('.emd').hasClass('emd')).to.equal(true);
       expect($('.emd').attr('emd-id')).to.equal("1");
       expect($('.emd').attr('emd-type')).to.equal("operation");
+
+    });
+  });
+});
+
+describe('Operation By Object Map', function() {
+
+  describe("Example of markdown without operation", function() {
+
+    it("should return the right object map", function() {
+
+      var md = `Lorem Ipsum Dolor`;
+      expect(eMd.getObjectMap(md)).to.deep.equal({
+        objects: [{
+          type: 'string',
+          content: 'Lorem Ipsum Dolor'
+        }]
+      });
+
+    });
+  });
+});
+
+describe('Operation And Exceptions', function() {
+
+  describe("Example of a simple exception", function() {
+
+    it("should return a @TODO", function() {
+
+      var md = `Lorem Ipsum {{P}} Dolor`;
+      expect(eMd.getObjectMap(md)).to.deep.equal({
+        objects: [{
+          type: 'string',
+          content: 'Lorem Ipsum '
+        }, {
+          type: 'operation',
+          original: 'P',
+          content: '??',
+          isInline: true,
+          exceptions: []
+        }, {
+          type: 'string',
+          content: ' Dolor'
+        }]
+      });
 
     });
   });
