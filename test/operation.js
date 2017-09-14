@@ -94,6 +94,8 @@ describe('Operation Rendered', function() {
   });
 });
 
+//@CONTINUE Write these tests ...
+
 describe('Operation By Object Map', function() {
 
   describe("Example of markdown without operation", function() {
@@ -119,22 +121,18 @@ describe('Operation And Exceptions', function() {
     it("should return the right object map with exception 1", function() {
 
       var md = `Lorem Ipsum {{P}} Dolor`;
-      console.log(eMd.getObjectMap(md));
-      expect(eMd.getObjectMap(md)).to.deep.equal({
-        objects: [{
-          type: 'string',
-          content: 'Lorem Ipsum '
-        }, {
-          type: 'operation',
-          original: 'P',
-          content: '??',
-          isInline: true,
-          exceptions: []
-        }, {
-          type: 'string',
-          content: ' Dolor'
-        }]
-      });
+      var eMdObjectMap = eMd.getObjectMap(md);
+
+      console.log(eMdObjectMap);
+      expect(eMdObjectMap.objects[0].type).to.equal('string');
+      expect(eMdObjectMap.objects[0].content).to.equal('Lorem Ipsum ');
+      expect(eMdObjectMap.objects[1].type).to.equal('operation');
+      expect(eMdObjectMap.objects[1].original).to.equal('P');
+      expect(eMdObjectMap.objects[1].content).to.equal('??');
+      expect(eMdObjectMap.objects[1].isInline).to.equal(true);
+      expect(eMdObjectMap.objects[1].exceptions).to.equal([]);
+      expect(eMdObjectMap.objects[2].type).to.equal('string');
+      expect(eMdObjectMap.objects[2].content).to.equal(' Dolor');
 
     });
 
@@ -143,11 +141,10 @@ describe('Operation And Exceptions', function() {
     it("should return the right object map with exception 2", function() {
 
       var md = `Lorem {{P=2}} Ipsum {{P€}} Dolor`;
-      console.log(eMd.getObjectMap(md));
       expect(eMd.getObjectMap(md)).to.deep.equal({
         objects: [{
           type: 'string',
-          content: 'Lorem Ipsum '
+          content: 'Lorem '
         }, {
           type: 'operation',
           original: 'P',
