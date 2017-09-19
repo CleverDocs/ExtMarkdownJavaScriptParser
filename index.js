@@ -10,10 +10,10 @@ Fs.readFile( "./index.md", "utf-8", function( err, fileContent ){
   if(err){
     console.log(err);
   }
-  console.log( JSON.stringify( eMd.getObjectMap( fileContent ), null, 1 ) );
+  //console.log( JSON.stringify( eMd.getObjectMap( fileContent ), null, 1 ) );
 
-  /*var html = md.render( eMd.getObjectMap( fileContent ) );
-  /*if( typeof fileWrite !== 'undefined' && fileWrite ){
+  var html = md.render( eMd.render( fileContent ) );
+  if( typeof fileWrite !== 'undefined' && fileWrite ){
     Fs.writeFile( fileWrite, html, function(err) {
         if(err) {
             return console.log(err);
@@ -21,5 +21,5 @@ Fs.readFile( "./index.md", "utf-8", function( err, fileContent ){
     });
   }else{
     console.log(html);
-  }*/
+  }
 });
