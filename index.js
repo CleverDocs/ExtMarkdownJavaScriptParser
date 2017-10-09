@@ -1,25 +1,18 @@
-var ExtMarkdown = require('./lib/eMd');
-var Remarkable = require('remarkable');
-var Fs = require('fs');
+const ExtMarkdown = require('./lib/ExtMarkdown');
+const Remarkable = require('remarkable');
+const Fs = require('fs');
 
-var md = new Remarkable({html: true});
-var eMd = new ExtMarkdown({tagsEnabled: true});
-var fileWrite = "./index.html";
+const md = new Remarkable({html: true});
+const eMd = new ExtMarkdown();
 
-Fs.readFile( "./index.md", "utf-8", function( err, fileContent ){
-  if(err){
+Fs.readFile("./index.md", "utf-8", function(err, fileContent) {
+  if (err) {
     console.log(err);
   }
-  //console.log( JSON.stringify( eMd.getObjectMap( fileContent ), null, 1 ) );
-
-  var html = md.render( eMd.render( fileContent ) );
-  if( typeof fileWrite !== 'undefined' && fileWrite ){
-    Fs.writeFile( fileWrite, html, function(err) {
-        if(err) {
-            return console.log(err);
-        }
+  var html = md.render(eMd.render(fileContent));
+    Fs.writeFile("./index.html", html, function(err) {
+      if (err) {
+        return console.log(err);
+      }
     });
-  }else{
-    console.log(html);
-  }
 });
