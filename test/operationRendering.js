@@ -1,16 +1,14 @@
 /**
  * Tests for all rendering process
  *
- */
 
 var ExtMarkdown = require('../lib/ExtMarkdown');
 
 var eMd = new ExtMarkdown();
-var eMdTags = new ExtMarkdown({tagsEnabled: true});
 var Chai = require('chai');
 var expect = Chai.expect;
 
-describe('Operation Rendered', function() {
+describe('Operation Rendering', function() {
 
   describe("Example of markdown without operation", function() {
 
@@ -88,3 +86,4 @@ describe('Operation Rendered', function() {
 describe('Operation By Object Map', function() {
 
 });
+*/
