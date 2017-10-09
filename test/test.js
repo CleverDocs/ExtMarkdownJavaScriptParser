@@ -12,7 +12,7 @@ const Chai = require('chai');
 const expect = Chai.expect;
 const eMd = new ExtMarkdown();
 
-describe('type mapping', function() {
+describe('Type mapping', function() {
 
   it("should return a map with EMdElement on index 0", function() {
     let md = `Lorem Ipsum`;
