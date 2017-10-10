@@ -3,11 +3,11 @@
  *
  */
 
-const ExtMarkdown = require('../lib/ExtMarkdown');
-const EMdElement = require('../lib/EMdElement');
-const EMdElementOperation = require('../lib/Rules/Operation/EMdElementOperation');
-const EMdElementLorem = require('../lib/Rules/Lorem/EMdElementLorem');
-
+const ExtMarkdown = require("../lib/ExtMarkdown");
+const EMdElement = require("../lib/EMdElement");
+const EMdElementOperation = require("../lib/Rules/Operation/EMdElementOperation");
+const EMdElementLorem = require("../lib/Rules/Lorem/EMdElementLorem");
+const SyntaxErrorEMdOperationException = require("../lib/Rules/Operation/EMdOperationException/SyntaxErrorEMdOperationException");
 const Chai = require('chai');
 const expect = Chai.expect;
 const eMd = new ExtMarkdown();
@@ -138,9 +138,13 @@ describe('Operations Output', function() {
 
 describe('Exceptions', function() {
 
-  it("should return a operation with exception", function() {
+  it("should return a operation with Syntax Error exception", function() {
     let md = `Operation {{TEST$=56+6}}`;
-    expect((eMd.map(md).eMdElementList[1].getOutput())).to.equal(``);
+    console.log(eMd.map(md).eMdElementList[1].getExceptions());
+    expect((eMd.map(md).eMdElementList[1].getExceptions()[0] instanceof SyntaxErrorEMdOperationException)).to.equal(true);
+    expect((eMd.map(md).eMdElementList[1].getExceptions()[0].number)).to.equal(0);
+    expect((eMd.map(md).eMdElementList[1].getExceptions()[0].line)).to.equal(1);
+    expect((eMd.map(md).eMdElementList[1].getExceptions()[0].column)).to.equal(5);
   });
 
 });
