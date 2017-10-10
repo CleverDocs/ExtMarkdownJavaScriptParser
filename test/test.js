@@ -5,8 +5,8 @@
 
 const ExtMarkdown = require('../lib/ExtMarkdown');
 const EMdElement = require('../lib/EMdElement');
-const EMdElementOperation = require('../lib/rules/Operation/EMdElementOperation');
-const EMdElementLorem = require('../lib/rules/Lorem/EMdElementLorem');
+const EMdElementOperation = require('../lib/Rules/Operation/EMdElementOperation');
+const EMdElementLorem = require('../lib/Rules/Lorem/EMdElementLorem');
 
 const Chai = require('chai');
 const expect = Chai.expect;
@@ -22,6 +22,8 @@ describe('Type mapping', function() {
 
   it("should return a map with 3 items (EMdElement, EMdElementOperation and EMdElement)", function() {
     let md = `Lorem Ipsum {{TEST=56+6}} Dolor`;
+
+    console.log(eMd.map(md).eMdElementList);
     expect((eMd.map(md).eMdElementList.length)).to.equal(3);
 
     expect((eMd.map(md).eMdElementList[0] instanceof EMdElement)).to.equal(true);
@@ -130,6 +132,15 @@ describe('Operations Output', function() {
     let md = `Result = **{{TEST}}**`;
     expect((eMd.map(md).eMdElementList[1].getOutput())).to.equal(`??`);
     expect((eMd.map(md).eMdElementList[1].getStatus())).to.equal(false);
+  });
+
+});
+
+describe('Exceptions', function() {
+
+  it("should return a operation with exception", function() {
+    let md = `Operation {{TEST$=56+6}}`;
+    expect((eMd.map(md).eMdElementList[1].getOutput())).to.equal(``);
   });
 
 });
