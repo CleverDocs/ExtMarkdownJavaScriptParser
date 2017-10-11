@@ -1,1 +1,1 @@
-Result = **{{TEST}}**
+Lorem Ipsum {{}} Dolor
