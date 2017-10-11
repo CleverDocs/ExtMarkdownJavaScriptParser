@@ -145,12 +145,10 @@ describe('Exceptions', function() {
     expect(eMd.map(md).eMdElementList[1].getExceptions()[0].column).to.equal(5);
   });
 
-  it("should return a operation with Runtime Error exception", function() {
+it("should return a operation with Runtime Error exception", function() {
     let md = `Operation {{TEST}}`;
     expect(eMd.map(md).eMdElementList[1].getExceptions()[0] instanceof RuntimeErrorEMdOperationException).to.equal(true);
     expect(eMd.map(md).eMdElementList[1].getExceptions()[0].number).to.equal(0);
-    expect(eMd.map(md).eMdElementList[1].getExceptions()[0].line).to.equal(1);
-    expect(eMd.map(md).eMdElementList[1].getExceptions()[0].column).to.equal(5);
   });
 
 });
