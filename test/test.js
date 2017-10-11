@@ -139,7 +139,7 @@ describe('Exceptions', function() {
   it("should return a operation with Syntax Error exception", function() {
     let eMdMap = eMd.map(`Operation {{TEST$=56+6}}`);
     expect(eMdMap.eMdElementList[1].getExceptions()[0] instanceof SyntaxErrorEMdOperationException).to.equal(true);
-    expect(eMdMap.eMdElementList[1].getExceptions()[0].number).to.equal(0);
+    expect(eMdMap.eMdElementList[1].getExceptions()[0].number).to.equal(1);
     expect(eMdMap.eMdElementList[1].getExceptions()[0].line).to.equal(1);
     expect(eMdMap.eMdElementList[1].getExceptions()[0].column).to.equal(5);
   });
@@ -147,7 +147,7 @@ describe('Exceptions', function() {
 it("should return a operation with Runtime Error exception", function() {
     let eMdMap = eMd.map(`Operation {{TEST}}`);
     expect(eMdMap.eMdElementList[1].getExceptions()[0] instanceof RuntimeErrorEMdOperationException).to.equal(true);
-    expect(eMdMap.eMdElementList[1].getExceptions()[0].number).to.equal(0);
+    expect(eMdMap.eMdElementList[1].getExceptions()[0].number).to.equal(1);
   });
 
 });
