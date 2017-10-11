@@ -152,10 +152,37 @@ it("should return a operation with Runtime Error exception", function() {
 
 });
 
-describe('Operations General Output', function() {
+describe('Operations General Render', function() {
 
-  it("should return an empty output", function() {
-    let eMdMap = eMd.map(`Operation {{TEST=56+6}}`);
-    expect(eMdMap.eMdElementList[1].getOutput()).to.equal(``);
+  //Example of markdown without operation
+  it("should return 'Lorem Ipsum Dolor'", function() {
+    expect(eMd.render(`Lorem Ipsum Dolor`)).to.equal(`Lorem Ipsum Dolor`);
+  });
+
+  //Example of a simple operation
+  it("should return 'Lorem Ipsum Dolor 2'", function() {
+    expect(eMd.render(`Lorem Ipsum Dolor {{1+1}}`)).to.equal(`Lorem Ipsum Dolor 2`);
+  });
+
+  //Example of empty inline operation, spaces in both sides must be erased
+  it("should return 'Lorem Ipsum Dolor'", function() {
+    expect(eMd.render(`Lorem Ipsum {{}} Dolor`)).to.equal(`Lorem Ipsum Dolor`);
+  });
+
+  //Example of an empty inline operation wraped by styles chars, spaces in both sides must be erased
+  it("should return 'Lorem Ipsum Dolor 2'", function() {
+    expect(eMd.render(`Lorem Ipsum **{{TEST=56+6}}** Dolor`)).to.equal(`Lorem Ipsum Dolor`);
+  });
+
+  //Example of empty inline operation at a both side of a string
+  it("should return 'Lorem Ipsum Dolor'", function() {
+    expect(eMd.render(`{{TEST=56+6}} Lorem Ipsum Dolor {{TEST=56+6}}`))
+      .to.equal(`Lorem Ipsum Dolor`);
+  });
+
+  //Example of empty inline operation wraped by styles at a both side of a string
+  it("should return 'Lorem Ipsum Dolor'", function() {
+    expect(eMd.render(`**{{TEST=56+6}}** Lorem Ipsum Dolor **{{TEST=56+6}}**`))
+      .to.equal(`Lorem Ipsum Dolor`);
   });
 });
