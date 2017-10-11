@@ -13,6 +13,7 @@ const Chai = require('chai');
 const expect = Chai.expect;
 const eMd = new ExtMarkdown();
 
+/*
 describe('Type mapping', function() {
 
   it("should return a map with EMdElement on index 0", function() {
@@ -150,39 +151,33 @@ it("should return a operation with Runtime Error exception", function() {
     expect(eMdMap.eMdElementList[1].getExceptions()[0].number).to.equal(1);
   });
 
-});
+});*/
 
 describe('Operations General Render', function() {
 
-  //Example of markdown without operation
-  it("should return 'Lorem Ipsum Dolor'", function() {
+  /*it("should return 'Lorem Ipsum Dolor' (Example of markdown without operation)", function() {
     expect(eMd.render(`Lorem Ipsum Dolor`)).to.equal(`Lorem Ipsum Dolor`);
   });
 
-  //Example of a simple operation
-  it("should return 'Lorem Ipsum Dolor 2'", function() {
+  it("should return 'Lorem Ipsum Dolor 2' (Example of a simple operation)", function() {
     expect(eMd.render(`Lorem Ipsum Dolor {{1+1}}`)).to.equal(`Lorem Ipsum Dolor 2`);
   });
 
-  //Example of empty inline operation, spaces in both sides must be erased
-  it("should return 'Lorem Ipsum Dolor'", function() {
+  it("should return 'Lorem Ipsum Dolor' (Example of empty inline operation, spaces in both sides must be erased)", function() {
     expect(eMd.render(`Lorem Ipsum {{}} Dolor`)).to.equal(`Lorem Ipsum Dolor`);
   });
 
-  //Example of an empty inline operation wraped by styles chars, spaces in both sides must be erased
-  it("should return 'Lorem Ipsum Dolor 2'", function() {
+  it("should return 'Lorem Ipsum Dolor 2' (Example of an empty inline operation wraped by styles chars, spaces in both sides must be erased)", function() {
     expect(eMd.render(`Lorem Ipsum **{{TEST=56+6}}** Dolor`)).to.equal(`Lorem Ipsum Dolor`);
-  });
+  });*/
 
-  //Example of empty inline operation at a both side of a string
-  it("should return 'Lorem Ipsum Dolor'", function() {
+  it("should return 'Lorem Ipsum Dolor' (Example of empty inline operation at a both side of a string)", function() {
     expect(eMd.render(`{{TEST=56+6}} Lorem Ipsum Dolor {{TEST=56+6}}`))
       .to.equal(`Lorem Ipsum Dolor`);
   });
 
-  //Example of empty inline operation wraped by styles at a both side of a string
-  it("should return 'Lorem Ipsum Dolor'", function() {
+  /*it("should return 'Lorem Ipsum Dolor' (Example of empty inline operation wraped by styles at a both side of a string)", function() {
     expect(eMd.render(`**{{TEST=56+6}}** Lorem Ipsum Dolor **{{TEST=56+6}}**`))
       .to.equal(`Lorem Ipsum Dolor`);
-  });
+  });*/
 });
