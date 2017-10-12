@@ -13,7 +13,6 @@ const Chai = require('chai');
 const expect = Chai.expect;
 const eMd = new ExtMarkdown();
 
-/*
 describe('Type mapping', function() {
 
   it("should return a map with EMdElement on index 0", function() {
@@ -27,7 +26,7 @@ describe('Type mapping', function() {
     expect(eMdMap.eMdElementList.length).to.equal(3);
 
     expect(eMdMap.eMdElementList[0] instanceof EMdElement).to.equal(true);
-    expect(eMdMap.eMdElementList[0].getOriginalText()).to.equal(`Lorem Ipsum `);
+    expect(eMdMap.eMdElementList[0].getOriginalText()).to.equal(`Lorem Ipsum`);
 
     expect(eMdMap.eMdElementList[1] instanceof EMdElementOperation).to.equal(true);
     expect(eMdMap.eMdElementList[1].getOriginalText()).to.equal(`{{TEST=56+6}}`);
@@ -41,7 +40,7 @@ describe('Type mapping', function() {
     expect(eMdMap.eMdElementList.length).to.equal(5);
 
     expect(eMdMap.eMdElementList[0] instanceof EMdElement).to.equal(true);
-    expect(eMdMap.eMdElementList[0].getOriginalText()).to.equal(`Lorem Ipsum `);
+    expect(eMdMap.eMdElementList[0].getOriginalText()).to.equal(`Lorem Ipsum`);
 
     expect(eMdMap.eMdElementList[1] instanceof EMdElementOperation).to.equal(true);
     expect(eMdMap.eMdElementList[1].getOriginalText()).to.equal(`{{TEST=56+6}}`);
@@ -61,13 +60,13 @@ describe('Type mapping', function() {
     expect(eMdMap.eMdElementList.length).to.equal(5);
 
     expect(eMdMap.eMdElementList[0] instanceof EMdElement).to.equal(true);
-    expect(eMdMap.eMdElementList[0].getOriginalText()).to.equal(`Lorem Ipsum `);
+    expect(eMdMap.eMdElementList[0].getOriginalText()).to.equal(`Lorem Ipsum`);
 
     expect(eMdMap.eMdElementList[1] instanceof EMdElementOperation).to.equal(true);
     expect(eMdMap.eMdElementList[1].getOriginalText()).to.equal(`{{TEST=56+6}}`);
 
     expect(eMdMap.eMdElementList[2] instanceof EMdElement).to.equal(true);
-    expect(eMdMap.eMdElementList[2].getOriginalText()).to.equal(` `);
+    expect(eMdMap.eMdElementList[2].getOriginalText()).to.equal(``);
 
     expect(eMdMap.eMdElementList[3] instanceof EMdElementOperation).to.equal(true);
     expect(eMdMap.eMdElementList[3].getOriginalText()).to.equal(`{{TEST=56+6}}`);
@@ -78,7 +77,6 @@ describe('Type mapping', function() {
 
   it("should return a map with 9 items with a ", function() {
     let eMdMap = eMd.map(`Lorem Ipsum **{{TEST=56+6}}** Dolor {{TEST2=56+6}} {{TEST=56+6}} ss ~lorem3 ds`);
-
     expect(eMdMap.eMdElementList.length).to.equal(9);
 
     expect(eMdMap.eMdElementList[0] instanceof EMdElement).to.equal(true);
@@ -88,13 +86,13 @@ describe('Type mapping', function() {
     expect(eMdMap.eMdElementList[1].getOriginalText()).to.equal(`{{TEST=56+6}}`);
 
     expect(eMdMap.eMdElementList[2] instanceof EMdElement).to.equal(true);
-    expect(eMdMap.eMdElementList[2].getOriginalText()).to.equal(`** Dolor `);
+    expect(eMdMap.eMdElementList[2].getOriginalText()).to.equal(`** Dolor`);
 
     expect(eMdMap.eMdElementList[3] instanceof EMdElementOperation).to.equal(true);
     expect(eMdMap.eMdElementList[3].getOriginalText()).to.equal(`{{TEST2=56+6}}`);
 
     expect(eMdMap.eMdElementList[4] instanceof EMdElement).to.equal(true);
-    expect(eMdMap.eMdElementList[4].getOriginalText()).to.equal(` `);
+    expect(eMdMap.eMdElementList[4].getOriginalText()).to.equal(``);
 
     expect(eMdMap.eMdElementList[5] instanceof EMdElementOperation).to.equal(true);
     expect(eMdMap.eMdElementList[5].getOriginalText()).to.equal(`{{TEST=56+6}}`);
@@ -151,11 +149,11 @@ it("should return a operation with Runtime Error exception", function() {
     expect(eMdMap.eMdElementList[1].getExceptions()[0].number).to.equal(1);
   });
 
-});*/
+});
 
 describe('Operations General Render', function() {
 
-  /*it("should return 'Lorem Ipsum Dolor' (Example of markdown without operation)", function() {
+  it("should return 'Lorem Ipsum Dolor' (Example of markdown without operation)", function() {
     expect(eMd.render(`Lorem Ipsum Dolor`)).to.equal(`Lorem Ipsum Dolor`);
   });
 
@@ -169,15 +167,16 @@ describe('Operations General Render', function() {
 
   it("should return 'Lorem Ipsum Dolor 2' (Example of an empty inline operation wraped by styles chars, spaces in both sides must be erased)", function() {
     expect(eMd.render(`Lorem Ipsum **{{TEST=56+6}}** Dolor`)).to.equal(`Lorem Ipsum Dolor`);
-  });*/
+  });
 
   it("should return 'Lorem Ipsum Dolor' (Example of empty inline operation at a both side of a string)", function() {
+    eMd.render(`{{TEST=56+6}} Lorem Ipsum Dolor {{TEST=56+6}}`);
     expect(eMd.render(`{{TEST=56+6}} Lorem Ipsum Dolor {{TEST=56+6}}`))
       .to.equal(`Lorem Ipsum Dolor`);
   });
 
-  /*it("should return 'Lorem Ipsum Dolor' (Example of empty inline operation wraped by styles at a both side of a string)", function() {
+  it("should return 'Lorem Ipsum Dolor' (Example of empty inline operation wraped by styles at a both side of a string)", function() {
     expect(eMd.render(`**{{TEST=56+6}}** Lorem Ipsum Dolor **{{TEST=56+6}}**`))
       .to.equal(`Lorem Ipsum Dolor`);
-  });*/
+  });
 });
