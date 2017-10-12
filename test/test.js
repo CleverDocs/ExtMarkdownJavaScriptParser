@@ -57,6 +57,7 @@ describe('Type mapping', function() {
 
   it("should return a map with 5 items (EMdElement, EMdElementOperation, EMdElement, EMdElementOperation). With same operations inside.", function() {
     let eMdMap = eMd.map(`Lorem Ipsum {{TEST=56+6}} {{TEST=56+6}} Dolor`);
+    console.log(eMdMap.eMdElementList);
     expect(eMdMap.eMdElementList.length).to.equal(5);
 
     expect(eMdMap.eMdElementList[0] instanceof EMdElement).to.equal(true);
