@@ -57,7 +57,7 @@ describe('Type mapping', function() {
 
   it("should return a map with 5 items (EMdElement, EMdElementOperation, EMdElement, EMdElementOperation). With same operations inside.", function() {
     let eMdMap = eMd.map(`Lorem Ipsum {{TEST=56+6}} {{TEST=56+6}} Dolor`);
-    
+
     expect(eMdMap.eMdElementList.length).to.equal(5);
 
     expect(eMdMap.eMdElementList[0] instanceof EMdElement).to.equal(true);
@@ -76,7 +76,7 @@ describe('Type mapping', function() {
     expect(eMdMap.eMdElementList[4].getOriginalText()).to.equal(` Dolor`);
   });
 
-  it("should return a map with 9 items with a ", function() {
+  it("should return a map with 9 items with 2 element type", function() {
     let eMdMap = eMd.map(`Lorem Ipsum **{{TEST=56+6}}** Dolor {{TEST2=56+6}} {{TEST=56+6}} ss ~lorem3 ds`);
     expect(eMdMap.eMdElementList.length).to.equal(9);
 
